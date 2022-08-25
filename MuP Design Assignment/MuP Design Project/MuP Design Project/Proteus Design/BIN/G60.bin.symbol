@@ -1,0 +1,22 @@
+< THE SYMBOL TABLE >  G60.bin  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+START                    	00400     	-1        	LABEL     	(NOSEG)   
+X100                     	0041C     	-1        	LABEL     	(NOSEG)   
+NMI_ISR                  	0041E     	-1        	LABEL     	(NOSEG)   
+EOC                      	00441     	-1        	LABEL     	(NOSEG)   
+EOC1                     	00477     	-1        	LABEL     	(NOSEG)   
+EOC2                     	004AE     	-1        	LABEL     	(NOSEG)   
+X1                       	004CD     	-1        	LABEL     	(NOSEG)   
+BUZZER                   	004EA     	-1        	LABEL     	(NOSEG)   
+WEIGHT                   	004F3     	-1        	LABEL     	(NOSEG)   
+VALI                     	004F9     	-1        	LABEL     	(NOSEG)   
+HTB                      	004FD     	-1        	LABEL     	(NOSEG)   
+INF1                     	0050A     	-1        	LABEL     	(NOSEG)   
+DELAY_1                  	00510     	-1        	NEAR      	(NOSEG)   
+PS1                      	00514     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 19-04-2021  --  1.45.47 PM ] 
+< END >
+ 

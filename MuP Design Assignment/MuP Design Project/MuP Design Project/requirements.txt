@@ -1,0 +1,10 @@
+• A detailed design Report - this format must be strictly followed
+
+• Complete Hardware Design - in multiple pages with proper labeling
+
+• The Proteus File
+
+• The EMU 8086 ASM files
+
+• The BIN File generated after assembly
+Relevant Manuals

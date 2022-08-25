@@ -1,0 +1,407 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+G60.bin -- emu8086 assembler version: 4.08  
+ 
+[ 19-04-2021  --  1.45.47 PM ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       #LOAD_SEGMENT=FFFFh#
+[   2]        :                                       #LOAD_OFFSET=0000h#
+[   3]        :                                       
+[   4]        :                                       #CS=0000h#
+[   5]        :                                       #IP=0000h#
+[   6]        :                                       
+[   7]        :                                       #DS=0000h#
+[   8]        :                                       #ES=0000h#
+[   9]        :                                       
+[  10]        :                                       #SS=0000h#
+[  11]        :                                       #SP=FFFEh#
+[  12]        :                                       
+[  13]        :                                       #AX=0000h#
+[  14]        :                                       #BX=0000h#
+[  15]        :                                       #CX=0000h#
+[  16]        :                                       #DX=0000h#
+[  17]        :                                       #SI=0000h#
+[  18]        :                                       #DI=0000h#
+[  19]        :                                       #BP=0000h#
+[  20]        :                                       
+[  21]        :                                       
+[  22]        :                                       	;address for ports of first 8255
+[  23]        :                                       	porta1 equ 00h
+[  24]        :                                       	portb1 equ 02h
+[  25]        :                                       	portc1 equ 04h
+[  26]        :                                       	creg1  equ 06h
+[  27]        :                                       
+[  28]        :                                       	;address for ports of second 8255
+[  29]        :                                       	porta2 equ 10h
+[  30]        :                                       	portb2 equ 12h
+[  31]        :                                       	portc2 equ 14h
+[  32]        :                                       	creg2  equ 16h
+[  33]        :                                       
+[  34]        :                                       	;address for ports of 8253
+[  35]        :                                       	counter0 equ 20h
+[  36]        :                                       	counter1 equ 22h
+[  37]        :                                       	counter2 equ 24h
+[  38]        :                                       	creg3 	 equ 26h
+[  39]        :                                       
+[  40]        :                                       
+[  41]        :                                       ; add your code here
+[  42]        :                                       
+[  43]    0000: E9 FD 03                              jmp     start
+[  44]    0003: 00 00 00 00 00                        db     5 dup(0)
+[  45]        :                                       
+[  46]        :                                       ;IVT entry for nmi
+[  47]        :                                       
+[  48]    0008: 1E 04                                 dw     nmi_isr          ;IP address for NMI Instruction Service Routine
+[  49]    000A: 00 00                                 dw     0000				;CS address for NMI INStruction Service Routine
+[  50]    000C: 00 00 00 00 00 00 00 00 00 00 00 00   db     1012 dup(0)		;Total 1024 locations reserved for populating IVT in ROM
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00                         
+[  51]        :                                       
+[  52]    0400:                                       start:					;Branch to the end of IVT
+[  53]        :                                       
+[  54]    0400: B8 00 02                              mov ax,0200h  ;Initializing RAM with address 20000h(In proteus samllest ROM chip size is 4k therefore first 8k memory locations(00000-01FFF) is for ROM)
+[  55]    0403: 8E D8                                 mov ds,ax	  ;Initializing segments with the starting address of RAM for storing temporary data.
+[  56]    0405: 8E C0                                 mov es,ax
+[  57]    0407: 8E D0                                 mov ss,ax
+[  58]        :                                       
+[  59]    0409: BC FE FF                              mov sp,0FFFEH ;Initializing stack pointer to the penultimate location in stack segment
+[  60]        :                                       
+[  61]    040C: B0 81                                 mov al,81h		;Initializing 8255B(All ports in mode 0)
+[  62]    040E: E6 16                                 out creg2,al    ;Initializing  Output Ports : PORT A2,PORT B2,PORT C2 UPPER
+[  63]        :                                       				;Input Port: PORT C2 LOWER
+[  64]        :                                       
+[  65]    0410: B0 91                                 mov al,91h      ;Initializing 8255A(All ports in mode 0)
+[  66]    0412: E6 06                                 out creg1,al    ;Initializing  Output Ports :PORT B1,PORT C1 UPPER
+[  67]        :                                       				;Input Ports: PORT C1 LOWER,PORT A1 UPPER
+[  68]        :                                       
+[  69]        :                                       
+[  70]    0414: B0 17                                 mov al,00010111b  ;Initializing Counter0 in mode 3,with BCD count. PCLK of 2.5Mhz given to 8253
+[  71]    0416: E6 26                                 out creg3,al	
+[  72]        :                                       
+[  73]    0418: B0 03                                 mov al,3h		;Count of 3 loaded in LSB in counter 0.	Output Clock of 833KHz given to clock of ADC0808
+[  74]    041A: E6 20                                 out counter0,al
+[  75]        :                                       
+[  76]    041C: EB FE                                 x100:jmp x100	;infinite loop waiting for NMI interrupt to be raised
+[  77]        :                                       
+[  78]        :                                       
+[  79]    041E:                                       nmi_isr:      ;ISR for NMI
+[  80]        :                                       
+[  81]    041E: B0 81                                 mov al,81h		;Reinitalizing 8255B
+[  82]    0420: E6 16                                 out creg2,al
+[  83]        :                                       
+[  84]    0422: B0 91                                 mov al,91h     ;Reinitializing 8255A
+[  85]    0424: E6 06                                 out creg1,al
+[  86]        :                                       
+[  87]        :                                       ; mov ax,785		;The conversion factor is 785.2
+[  88]        :                                       ; mov [0020h],ax  ;Storing the conversion factor in memory
+[  89]        :                                       ; mov al,2        ;Integer and decimal part  of the conversion factor is stored in two separate contiguous blocks of memory.
+[  90]        :                                       ; mov [0022h],al   ;785 at 0020h memory loc and 2h at 0022h memory loc.
+[  91]        :                                       
+[  92]    0426: BB 23 00                              mov bx, 0023h    ;Address of next free location
+[  93]        :                                       
+[  94]        :                                       ;converting the analog value of first load cell into digital using adc 0808--------------------------
+[  95]        :                                       
+[  96]    0429: B0 00                                 mov al,00000000b	;Selecting the first load cell present at channel 0.
+[  97]    042B: E6 02                                 out portb1,al
+[  98]        :                                       
+[  99]    042D: B0 0E                                 mov al,00001110b      ;Resetting soc to 0
+[ 100]    042F: E6 06                                 out creg1,al
+[ 101]        :                                       
+[ 102]    0431: B0 0B                                 mov al,00001011b	;;Setting ale to 1
+[ 103]    0433: E6 06                                 out creg1,al
+[ 104]        :                                       
+[ 105]    0435: B0 0F                                 mov al,00001111b      ;Setting soc to 1
+[ 106]    0437: E6 06                                 out creg1,al
+[ 107]        :                                       
+[ 108]    0439: B0 0A                                 mov al,00001010b	;Resetting ale to 0
+[ 109]    043B: E6 06                                 out creg1,al
+[ 110]        :                                       
+[ 111]    043D: B0 0E                                 mov al,00001110b     ;Resetting soc to 0
+[ 112]    043F: E6 06                                 out creg1,al
+[ 113]        :                                       
+[ 114]        :                                       
+[ 115]    0441: E4 14                                 EOC:    in al,portc2        ;Waiting for end of conversion.
+[ 116]    0443: 24 01                                 and al,00000001b
+[ 117]    0445: 74 FA                                 jz EOC
+[ 118]        :                                       
+[ 119]    0447: B0 0B                                 mov al,00001011b	;Setting the OE for the data to be read into port A of 8255 from ADC
+[ 120]    0449: E6 16                                 out creg2,al
+[ 121]        :                                       
+[ 122]    044B: B0 91                                 mov al,91h			;Reading the digital equivalent of the analog value from ADC of load sensor one
+[ 123]    044D: E6 06                                 out creg1,al
+[ 124]        :                                       
+[ 125]    044F: E4 00                                 in al,porta1		;moving the first value to location 0023h
+[ 126]    0451: 88 07                                 mov [bx],al
+[ 127]        :                                       
+[ 128]    0453: B0 0A                                 mov al,0001010b		;resetting OE to 0 to avoid reading garbage values from ADC
+[ 129]    0455: E6 16                                 out creg2,al
+[ 130]        :                                       
+[ 131]        :                                       ;converting the analog value of second load cell into digital---------------------------------------------
+[ 132]        :                                       
+[ 133]    0457: B0 91                                 mov al,91h			;Reintitalizing 8255A
+[ 134]    0459: E6 06                                 out creg1,al
+[ 135]        :                                       
+[ 136]    045B: B0 81                                 mov al,81h			;Reinitializing 8255B
+[ 137]    045D: E6 16                                 out creg2,al
+[ 138]        :                                       
+[ 139]    045F: B0 01                                 mov al,00000001b	;Selecting the second load cell present at channel 1.
+[ 140]    0461: E6 02                                 out portb1,al
+[ 141]        :                                       
+[ 142]    0463: B0 0E                                 mov al,00001110b      ;setting soc to 0
+[ 143]    0465: E6 06                                 out creg1,al
+[ 144]        :                                       
+[ 145]    0467: B0 0B                                 mov al,00001011b		;setting ale to 1
+[ 146]    0469: E6 06                                 out creg1,al
+[ 147]        :                                       
+[ 148]    046B: B0 0F                                 mov al,00001111b      ;setting soc to 1
+[ 149]    046D: E6 06                                 out creg1,al
+[ 150]        :                                       
+[ 151]    046F: B0 0A                                 mov al,00001010b		;resetting ale to 0
+[ 152]    0471: E6 06                                 out creg1,al
+[ 153]        :                                       
+[ 154]    0473: B0 0E                                 mov al,00001110b     ;resetting soc to 0
+[ 155]    0475: E6 06                                 out creg1,al
+[ 156]        :                                       
+[ 157]        :                                       
+[ 158]    0477: E4 14                                 EOC1:    in al,portc2            ;Waiting for end of conversion to be raised
+[ 159]    0479: 24 01                                 and al,00000001b
+[ 160]    047B: 74 FA                                 jz EOC1
+[ 161]        :                                       
+[ 162]    047D: B0 0B                                 mov al,00001011b		;Setting the OE for the data to be read into port A of 8255 from ADC
+[ 163]    047F: E6 16                                 out creg2,al
+[ 164]        :                                       
+[ 165]    0481: B0 91                                 mov al,91h				;Reading the digital equivalent of the analog value from ADC of  second load sensor
+[ 166]    0483: E6 06                                 out creg1,al
+[ 167]        :                                       
+[ 168]    0485: E4 00                                 in al,porta1			;moving the second value to location 0024h
+[ 169]    0487: 88 47 01                              mov [bx+1],al
+[ 170]        :                                       
+[ 171]    048A: B0 0A                                 mov al,0001010b			;resetting OE to 0 to avoid reading garbage values from ADC
+[ 172]    048C: E6 16                                 out creg2,al
+[ 173]        :                                       
+[ 174]        :                                       ;converting the analog value of third load cell into digital-----------
+[ 175]        :                                       
+[ 176]        :                                       
+[ 177]    048E: B0 91                                 mov al,91h
+[ 178]    0490: E6 06                                 out creg1,al
+[ 179]        :                                       
+[ 180]    0492: B0 81                                 mov al,81h
+[ 181]    0494: E6 16                                 out creg2,al
+[ 182]        :                                       
+[ 183]    0496: B0 02                                 mov al,00000010b	;Selecting the third load cell present at channel 2.
+[ 184]    0498: E6 02                                 out portb1,al
+[ 185]        :                                       
+[ 186]    049A: B0 0E                                 mov al,00001110b      ;setting soc to 0
+[ 187]    049C: E6 06                                 out creg1,al
+[ 188]        :                                       
+[ 189]    049E: B0 0B                                 mov al,00001011b	 ;setting ale to 1
+[ 190]    04A0: E6 06                                 out creg1,al
+[ 191]        :                                       
+[ 192]    04A2: B0 0F                                 mov al,00001111b      ;setting soc to 1
+[ 193]    04A4: E6 06                                 out creg1,al
+[ 194]        :                                       
+[ 195]    04A6: B0 0A                                 mov al,00001010b	 ;resetting ale to 0
+[ 196]    04A8: E6 06                                 out creg1,al
+[ 197]        :                                       
+[ 198]    04AA: B0 0E                                 mov al,00001110b     ;resetting soc to 0
+[ 199]    04AC: E6 06                                 out creg1,al
+[ 200]        :                                       
+[ 201]    04AE: E4 14                                 EOC2:    in al,portc2            ;Waiting for End of Conversion
+[ 202]    04B0: 24 01                                 and al,00000001b
+[ 203]    04B2: 74 FA                                 jz EOC2
+[ 204]        :                                       
+[ 205]    04B4: B0 0B                                 mov al,00001011b	;Setting the OE for the data to be read into port A of 8255 from ADC
+[ 206]    04B6: E6 16                                 out creg2,al
+[ 207]        :                                       
+[ 208]    04B8: B0 91                                 mov al,91h			;Reading the digital equivalent of the analog value from ADC of  second load sensor
+[ 209]    04BA: E6 06                                 out creg1,al
+[ 210]        :                                       
+[ 211]    04BC: E4 00                                 in al,porta1		;moving the third value to location 0025h
+[ 212]    04BE: 88 47 02                              mov [bx+2],al
+[ 213]        :                                       
+[ 214]    04C1: B0 0A                                 mov al,0001010b		;resetting OE to 0 to avoid reading garbage values from ADC
+[ 215]    04C3: E6 16                                 out creg2,al
+[ 216]        :                                       
+[ 217]        :                                       
+[ 218]        :                                       
+[ 219]        :                                       
+[ 220]    04C5: B1 03                                 mov cl, 03
+[ 221]    04C7: BB 23 00                              mov bx, 0023h
+[ 222]    04CA: B8 00 00                              mov ax, 00
+[ 223]    04CD: B6 00                                 x1: mov dh, 00
+[ 224]    04CF: 8A 17                                 	mov dl, [bx]
+[ 225]    04D1: 03 C2                                 	add ax, dx
+[ 226]    04D3: 43                                    	inc bx
+[ 227]    04D4: FE C9                                 	dec cl
+[ 228]    04D6: 75 F5                                 	JNZ x1
+[ 229]        :                                       
+[ 230]    04D8: B1 03                                 mov cl,3
+[ 231]    04DA: F6 F1                                 div cl			;dividing the overall quotient by 3 to get average to get the final answer
+[ 232]    04DC: 8A D8                                 mov bl, al
+[ 233]    04DE: B7 00                                 mov bh, 00
+[ 234]        :                                       
+[ 235]        :                                       
+[ 236]    04E0: 80 FB 63                              cmp bl,63h     ;comparing with 99
+[ 237]    04E3: 76 0E                                 jbe weight	  ;If bx value lesser than 99 jump to display weight.
+[ 238]        :                                       
+[ 239]    04E5: 80 FB 63                              cmp bl,63h
+[ 240]    04E8: 77 00                                 ja buzzer	  ;If greater than 99 jump to sound the buzzer
+[ 241]        :                                       
+[ 242]        :                                       ; cmp dx,0000h  ;If the bx was equal to 99 then if the remainder part is 0 then jump to display the weight.
+[ 243]        :                                       ; je weight
+[ 244]        :                                       
+[ 245]    04EA:                                       buzzer:
+[ 246]    04EA: B0 09                                 mov al,00001001b
+[ 247]    04EC: E6 16                                 out creg2, al      ;sounds the buzzer
+[ 248]        :                                       
+[ 249]    04EE: E8 1F 00                              call delay_1		  ;Generates delay of 0.0045ms to allow the bbuzzer circuit to respond to the changes made at the terminal	
+[ 250]        :                                       
+[ 251]    04F1: EB F7                                 jmp buzzer
+[ 252]        :                                       
+[ 253]    04F3:                                       weight:
+[ 254]        :                                       ;dx has the decimal and bx has the integer
+[ 255]        :                                       ;extracting the digits of integer
+[ 256]    04F3: B0 81                                 mov al,81h
+[ 257]    04F5: E6 16                                 out creg2,al
+[ 258]        :                                       
+[ 259]    04F7: 8A C3                                 mov al, bl
+[ 260]        :                                       
+[ 261]    04F9: 8A D8                                 VALI:   MOV       BL,AL
+[ 262]    04FB: B0 00                                 MOV       AL,0
+[ 263]    04FD: 04 01                                 HTB:	ADD       AL,01
+[ 264]    04FF: 27                                    	DAA
+[ 265]    0500: FE CB                                 	DEC       BL
+[ 266]    0502: 75 F9                                 	JNZ       HTB
+[ 267]        :                                       
+[ 268]    0504: E6 10                                 out porta2, al
+[ 269]    0506: 51                                    push cx
+[ 270]    0507: B9 50 C3                              mov cx, 50000
+[ 271]    050A:                                       inf1:
+[ 272]    050A: E8 03 00                              	call delay_1
+[ 273]    050D: E2 FB                                 	loop inf1
+[ 274]    050F: 59                                    pop cx
+[ 275]        :                                       
+[ 276]        :                                       ; ;starting the display process
+[ 277]        :                                       ; display:
+[ 278]        :                                       
+[ 279]        :                                       
+[ 280]    0510:                                       delay_1  proc   near
+[ 281]        :                                       ;sub-routine for 2 minute delay
+[ 282]        :                                       ;;delay calculation
+[ 283]        :                                       ; no. of cycles for loop = 18 if taken/ 5 if not taken = 499x 18 +5
+[ 284]        :                                       ;no. of cycles for ret 16
+[ 285]        :                                       ;no. of cycles for call 19
+[ 286]        :                                       ;no. of cycles for mov 4
+[ 287]        :                                       ;no. of cycles for push 4
+[ 288]        :                                       ;no. of cycles for pop 4
+[ 289]        :                                       ;clock speed 2 MHz - 1 clock cycle 0.5us for proteus simulation
+[ 290]        :                                       ;clock soeed 5 Mhz -1 clock cycle 0.2us for real world design
+[ 291]        :                                       ;total no.cycles delay = clkcycles for call + mov cx,imm + (content of cx-1)*18+5 + ret + push+pop
+[ 292]        :                                       ;= (19 +4+ 18*499+5+16+4+4)0.2us = 0.0018ms for real world and 0.0045ms for proteus simulation
+[ 293]        :                                       
+[ 294]    0510: 51                                    push cx
+[ 295]    0511: B9 F4 01                              mov cx,500
+[ 296]    0514: E2 FE                                 ps1: loop ps1
+[ 297]    0516: 59                                    pop cx
+[ 298]    0517: C3                                    ret
+[ 299]        :                                       delay_1  endp
+[ 300]    0518: CF                                    iret
+[ 301]        :                                       
+[ 302]        :                                       
+[ 303]        :                                       
+[ 304]        :                                       
+[ 305]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================
